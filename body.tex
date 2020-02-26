@@ -1,166 +1,165 @@
 \section{Introduction}
 
-{\bf Eventually, please replace all of the remaining text with your paper text.}
-\vskip 0.4in
+This paper describes the Vera Rubin Observatory Software Architecture. The Software Architecture contains 
+high-level decisions that dictates how software for different components interact, how it is designed to control hardware
+and how users interact with the system.
+
+...
+
+\section{Observatory System Software Architecture}
+
+% this is a copy of LSE-150. Need to improve/review to fit best with the construction paper format
 
 
-The LSST Construction Project team needs to document the as-built hardware and software
-(see LSE-79 and LSE-390 for details). Although this activity will likely continue well into the operations phase, the majority 
-of anticipated documents will be necessary to enable efficient and robust early science with the LSST 
-facility and thus must be available, at least in a draft form, by the first data release. 
+The LSST control system is based on a reactive data-driven actor-based architecture that uses a multi cast Data Distribution Service 
+(DDS) messaging protocol middleware. %A high level view of this architecture is given in \figref{fig:arc}, where each box corresponds to a 
+component of the system (not all components are displayed here).
 
-As a first step, we are now assembling teams that will be in charge of delivering these documents.
-An initial paper list collated by subsystem leaders includes about 40 papers that will be submitted 
-to relevant professional journals. Therefore, this deliverable represents a major undertaking
-and we need to start early. In addition, the commissioning period will be shorter than anticipated 
-due to various delays in construction  and thus the time to complete these papers will be
-shorter, too. Although most of these papers cannot be finished before the end of construction 
-because they will require analysis of LSST commissioning data, we can significantly mitigate
-the risk that they will never be finished by starting early. The early start will also help 
-mitigate another source of stress for the team during the busy commissioning phase. 
-
- 
-\section{Initial Plan} 
-
-The subsystem leaders have assembled an initial list of papers, listed in Appendix. 
-It is likely that this list will evolve with time. 
-Each paper has an editor assigned to it. Each editor is meant to be a team leader
-who will be initially responsible for the completion of the assigned paper (or perhaps 
-until somone else from the team assumes this leadership role). The editor is not 
-necessarily the team member who will do most of the required work, or who will 
-eventually become the first author. Both issues will be handled by on an individual team basis. 
-
-\subsection{The timeline} 
-
-We would like to have all the sections that do not depend on commissioning data 
-written and reviewed by February 2021. If we accomplish this goal, we will both
-have easier time completing these papers, and the team will be less stressed during
-the commissioning phase. 
-
-Our initial timeline is as follows (the further into the future, the less certain it is): 
-\begin{enumerate} 
-\item 
-Subsystem leads assemble the initial list of papers (DONE)
-\item
-Setup latex templates and email exploders (lsst-constrpapers) (DONE)
-\item
-Schedule the first telecon to discuss task, overall plan and timeline (Oct 2019).
-\item 
-Delivery of paper outlines and the second telecon (Jan 2020). Each paper
-outline should at least contain the list of all sections, their lead authors, and
-a few sentences about the section scope. Overachievers can add a list of figures etc.
-for extra credit. 
-\item
-First rough draft of sections that can be written without having the LSST commissioning
-data and the third telecon (June 2020). These drafts should at least include subsection
-structure, lists of planned tables, figures, rough text,  and identification of any impediments 
-to make the Oct. deadline for drafts ready for review (so that we can replan if need be). 
-\item 
-Sections that can be written without having the data ready for an internal project review and
-the fourth telecon (Nov 2020). 
-\item
-Reviews available and the fifth telecon (Feb 2021)
-\item
-Implementation of the reviewers' comments (from Feb 2021 until first light) 
-\item 
-Final drafts, including sections that depend on LSST data, available for
-review and the sixth telecon (Aug 2022)
-\item
-Implementation of the reviewers' comments (from Aug 2021 until the start of operations, 
-planned for Oct 3, 2022).  Proceeding with submissions, details TBD...
-\end{enumerate}
-
-
-
-
-\section{Some technicalities: author list and standard LSST references} 
-
-Thank you Tim Jenness and Wil O'Mullane for helping with templates! 
-
-\subsection{The LSST LaTeX Classes}
-
-Please see the installation instructions\footnote{\url{https://lsst-texmf.lsst.io/install.html}} 
-for lsst-texmf. Once you have it installed, you should be able to compile your paper
-using make. 
-
-\subsection{How to handle author list?} 
-
-Authors come from the authors.yaml file --  find the author ids in the lsst-texmf/etc/authordb.yaml - use db2authors to get the authors and institutes from the db. 
-
-{\bf XXX Wil, the above is unclear: need more detail about how to use db2authors,
-what is its output and what to do with it...} 
-
-
-\subsection{How to handle LSST standard references?} 
-
-The papers should cite standard LSST references\footnote{See \url{https://github.com/lsst-pst/LSSTreferences}}, 
-where appropriate. For the usage, please see below.  These examples all use the ADS handle, unless they are 
-project docs then the use the project handle like LSE-17.
-
-All are on the lsst-texmf which you can get from \url{http://lsst-texmf.lsst.io}
-
-
-\subsubsection{LSST System and Science}
-
-The LSST system (brief overview of telescope, camera and data management subsystems),
-science drivers and science forecasts are described in:
-
-\begin{itemize}
-\item LSST Science Requirements Document: \cite{LPM-17}.
-\item LSST overview paper: \cite{2008arXiv0805.2366I}.
-\item LSST Science Book: \cite{abell2009lsst}.
-\end{itemize}
-%------------------------------------------------------------------------------
-
-
-\subsubsection{Simulations}
-
-The LSST simulations are described in a series of papers. Use of the LSST simulations should cite the LSST simulations overview paper \cite{2014SPIE.9150E..14C} and the specific simulation tools used:
-
-\begin{itemize}
-\item LSST Catalogs (CatSim): \cite{2014SPIE.9150E..14C}
-\item Feature-Based Scheduler: \cite{2018arXiv181004815N}
-\item Operations Simulator (OpSim): Scheduler \cite{2016SPIE.9910E..13D}, SOCS \cite{2016SPIE.9911E..25R}
-\item Metrics Analysis Framework (MAF): \cite{2014SPIE.9149E..0BJ}
-\item Image simulations (Phosim): \cite{2015ApJS..218...14P}
-\item Sky brightness model: \cite{2016SPIE.9910E..1AY}
-\item LSST Performance for NEO (or moving object) discovery: \cite{2018Icar..303..181J}
-\end{itemize}
-%------------------------------------------------------------------------------
-
-
-\subsubsection{Data Management}
-
-LSST data management system and the data products are described in:
-
-\begin{itemize}
-  \item The LSST Data Management System: \cite{2015arXiv151207914J}
-  \item Data Products Definition Document: \cite{LSE-163}
-\end{itemize}
- %------------------------------------------------------------------------------
-
-
-\subsubsection{Camera}
-
-\begin{itemize}
-   \item Design and development of the LSST camera: \cite{2010SPIE.7735E..0JK}
-\end{itemize}
-%------------------------------------------------------------------------------
-
-
-\subsubsection{Telescope and Site}
-
-\begin{itemize}
-   \item Telescope and site overview and status in 2014:  \cite{2014SPIE.9145E..1AG}
-\end{itemize}
-%------------------------------------------------------------------------------
-
-\subsubsection{System Engineering}
-
-\begin{itemize}
-   \item LSST systems engineering: \cite{2014SPIE.9150E..0MC}
-   \item System verification and validation: \cite{2014SPIE.9150E..0NS}
-\end{itemize}
+The LSST System Architecture is comprised mainly of;
 %
+\begin{itemize}
+\item The Service Abstraction Layer (SAL\footnote{\url{https://docushare.lsstcorp.org/docushare/dsweb/Get/Document-21527/}}) communication middleware. Based on the DDS protocol, it provides interfaces for all the project adopted programming languages (LabView, C++, Java and Python).
+\item Engineering and Facility Database (EFD).
+\item SAL-aware reactive components, a.k.a Commandable SAL Components (CSCs).
+\item LSST Operators Visualization Environment (LOVE).
+\item User interface servers.
+\end{itemize}
 
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=\textwidth]{arc}
+%\caption{High Level Architecture Diagram.\label{fig:arc}}
+%\end{center}
+%\end{figure}
+
+The SAL middleware is the backbone of the LSST system architecture. It is a high level layer on top of Data 
+Distribution Service (DDS), a standard message passing system. LSST uses the PrismTech OpenSplice DDS library, 
+community edition. It implements three distinct types of messages; Commands, Events and Telemetry, with distinct 
+purposes. Commands are sent to a specific component, which must acknowledge its receipt and perform some action. 
+In general, the receiving component will be the only entity listening for the commands it accepts\footnote{But note that the EFD, for instance, will also be listening for 
+commands, though it will not acknowledge them.}. Events and Telemetry are messages broadcast by components to the 
+middleware and are available to any entity on the system to receive. The distinction between Events and Telemetry is that 
+Events are output when conditions change, whereas Telemetry is output at semi-regular intervals. As such, it is much more 
+important that Events be transmitted reliably than Telemetry. We cannot afford to lose any events, but we can lose occasional 
+Telemetry. Thus Events are sent using a higher Quality of Service (QoS).
+
+The EFD is responsible for capturing all SAL messages broadcasts to the middleware (including Commands, Events and Telemetry) and storing that information into a database.
+
+CSCs are the main actors of the LSST system architecture. They are responsible for managing the incoming traffic of data and take 
+appropriate actions, controlling hardware (e.g. M1M3, M2, Mount Controller, etc in Fig.~\ref{fig:arc}), software (e.g. Optics Controller 
+Reconstructor, DMCS Interface, etc in Fig.~\ref{fig:arc}) or even other CSCs (e.g. ScriptQueue, TCS, ATCS, OCS, etc in 
+Fig.~\ref{fig:arc} ).
+
+LOVE is responsible for capturing SAL messages and displaying them in a useful way for general users, providing some basic interface to 
+query and analyze data from the EFD, an interface to issue pre-defined commands to a set of components and user interaction with the 
+ScriptQueue (see Sect.~\ref{sect:scriptq}).
+
+The SAL processes XML based definitions of the Commands, Events, and Telemetry for each CSC. Using this information, it creates 
+runtime objects which support the messaging required. These take the form of shared libraries (C++, Python, LabVIEW) or Jar archives 
+(Java) which implement consistent namespaces and API's. Other assets such as Simulated data, Sql table definitions, and web based 
+documentation, may also be generated. On top of these low level APIs, developers have access to two higher-level set of frameworks; 
+Python SalObj\footnote{\url{https://github.com/lsst-ts/ts_salobj}} library and the LabVIEW component template. No higher level framework 
+is supported for implementations in Java or C++.
+
+Overall, the system architecture can be divided into three main namespaces; Observatory, Main Telescope (MT) and Auxiliary Telescope 
+(AT). The Observatory is the highest level and encapsulates both the Main Telescope, Auxiliary Telescope and global components such
+as the script queue, scheduler, environment awareness system, etc (see Fig.~\ref{fig:arc}).
+
+\subsection{SalObj - Python and scripting }\label{sect:salobj}
+
+SalObj is a Python library that provides a pythonic and object-oriented interface for SAL components such as CSCs and SAL 
+scripts (see Sect.~\ref{sect:scriptq}). The library defines two sets of base classes that are mirror to each other, 
+Remote and Controller. A Remote will send commands to and receive telemetry and events from a specific component whereas a 
+Controller will receive commands and publish telemetry and events. SalObj also provides BaseCsc, a subclass of Controller 
+that handles the standard state transitions and is intended to be used as a parent class for CSC.
+
+Internally, SalObj uses the python library asyncio\footnote{\url{https://docs.python.org/3/library/asyncio.html}} to handle the 
+inherently asynchronous nature of the SAL messaging system.
+
+\subsection{Hardware interface components}\label{sect:hardware_csc}
+Probably the most critical or sensitive components of the LSST system architecture are those that directly control hardware. Some 
+of these components are going to be delivered directly by external vendors, such as those that will control the main telescope 
+mount (MTMount) and the main telescope secondary mirror (MTM2). There are also those that are developed in house, e.g. the 
+main telescope M1M3 (MTM1M3).
+
+In some special cases, where fast real time response is required, it is highly desirable that the control software and hardware are part 
+of an integrated system. For those systems, the components are developed either using the LabView component template, which is 
+part of the LSST infrastructure or in C++ developed using the low level SAL API.
+
+In most other cases, the hardware comes with control software that can be easily interfaced by using standard protocols (such as 
+TCP/IP or serial ports), and there is no special need for the component software to reside close to the low level hardware controller. 
+In those cases, the components are written in Python using the SalObj library which is also part of the LSST infrastructure. By 
+writing these components using a unified language and library (Python+SalObj) we allow a high level of flexibility and 
+maintainability of the software and considerably decrease the development cycle.
+
+\subsection{Pure software components}\label{sect:software_csc}
+In the LSST System Architecture there are a number of components that, even though they do not control hardware directly, dictate 
+what hardware components are supposed to do. Some of these components are responsible for heavy computational routines, 
+such as the Optical Feedback Control (MTOFC), which is responsible for applying corrections to both M1M3, M2 and 
+hexapod components for the main telescope or even the Scheduler, which is responsible for processing an entire set of 
+observatory telemetry information and history of observations to compute an observing queue.
+
+These pure software components are mostly written in Python using SalObj library. There are three special cases of these 
+components that form the basis of the LSST System Architecture; the ScriptQueue (Sect.~\ref{sect:scriptq}), Control 
+Systems (Sect.~\ref{sect:ocs}) and the Watcher (Sect.~\ref{sect:watcher}). Together, they provide the tools needed for 
+integration, commissioning and operation of the observatory.
+
+\subsection{Configuration Management}\label{sect:config}
+During commissioning and operations, LSST will have a large number of running software components under the purview of DM, 
+Camera, and TSS. In general, the behavior of each of these components is modifiable through configuration information which 
+is read in during startup of the component, or possibly changed while the component is running. Careful management of 
+this configuration information is crucial to reliable functioning of the Observatory, and to the analysis of its data products.
+
+There are basically two ways configurations are managed, using a configuration database or version management, for 
+ascii-file based configuration. Configuration databases can use any type of database technology as long as versioning 
+control is properly implemented and verified. 
+
+For file-based configuration, version control is done using git repositories
+Git is already a standard in industry as a software management tool and has becoming increasingly used 
+to manage general documents and files as well, not to mention that it is already readily available and broadly adopted by the 
+project. Therefore, each component must be capable of handling a git-based configuration repository.
+These configuration repositories will be hosted on a configuration server at the summit so that, even if communication with the 
+base or the internet is not available, components still maintain access to their configuration repositories. 
+
+Several options for configuration file format, and their associated software tools, have been considered. Each of the 
+available options naturally has its strengths and weaknesses, and none stand out as being particularly useful for all LSST 
+use cases (and/or available for all the project adopted programming languages). The standard adopted for LSST 
+software components is YAML (\url{https://yaml.org}). If a specific component is developed in a language without support
+to YAML, a waver may be granted.
+
+\section{Monitoring and Interactive Systems}\label{sect:mis}
+
+This section contains a description of the monitoring and interactive systems.
+
+\subsection{LSST Operations and Visualization Environment (LOVE)}\label{sect:love}
+
+Description of LOVE interface.
+
+\subsection{User interface servers}\label{sect:uis}
+
+Description of jupyter lab server for control and data analysis. Reference LSP/nublado
+
+\subsection{Script Queue}\label{sect:scriptqueue}
+
+Description of the Script Queue. 
+
+\subsection{Watcher}\label{sect:watcher}
+
+Description of the Watcher. 
+
+\section{Major component namespaces}\label{sect:major}
+
+\subsection{Observatory Control Systems}\label{sect:ocs}
+
+Description of OCS components
+
+\subsection{Main Telescope Control Systems}\label{sect:mtcs}
+
+Description of Main telescope components
+
+\subsection{Auxiliary Telescope Control Systems}\label{sect:atcs}
+
+Description of Auxiliary Telescope components
+
+\section{Conclusions}\label{sect:conc}
 
